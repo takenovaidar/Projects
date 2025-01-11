@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+
+    static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
+    static ArrayList<Integer> computerPositions = new ArrayList<Integer>();
+
+    
     public static void main(String[] args) {
         char[][] board = {{'1', '|','2', '|', '3'},
                 {'-','+','-','+','-'},
@@ -70,5 +75,24 @@ public class TicTacToe {
                 break;
         }
     }
+    public static String winnerChek() {
+        List topRow = Arrays.asList(1, 2, 3);
+        List bottomRow = Arrays.asList(4, 5, 6);
+        List downRow = Arrays.asList(7, 8, 9);
+        List leftCol = Arrays.asList(1, 4, 7);
+        List buttomtCol = Arrays.asList(2, 5, 8);
+        List rightCol = Arrays.asList(3, 6, 9);
+        List leftRowCol = Arrays.asList(1, 5, 9);
+        List rightRowCol = Arrays.asList(3, 5, 7);
+
+        List<List> winners = new ArrayList<List>();
+        winners.add(topRow);
+        winners.add(bottomRow);
+        winners.add(downRow);
+        winners.add(leftCol);
+        winners.add(buttomtCol);
+        winners.add(rightCol);
+        winners.add(leftRowCol);
+        winners.add(rightRowCol);
 }
 
