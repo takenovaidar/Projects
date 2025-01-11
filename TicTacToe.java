@@ -9,14 +9,20 @@ public class TicTacToe {
                 {'7','|','8', '|', '9'}};
         printBoard(board);
 
-        String player = "player";
-        System.out.print(player + " Input your move from 1-9: ");
-        Scanner scanner = new Scanner(System.in);
-        int position = scanner.nextInt();
-        System.out.println(position);
+        while (true) {
+            String player = "player";
+            System.out.print(player + " Input your move from 1-9: ");
+            Scanner scanner = new Scanner(System.in);
+            int PlayerTurn = scanner.nextInt();
+            System.out.println(PlayerTurn);
+            placePiece(board, PlayerTurn, "player");
 
-        placePiece(board, position, "player");
-        printBoard(board);
+            Random random = new Random();
+            int ComTurn = random.nextInt(9) + 1;
+            placePiece(board, ComTurn, "Computer");
+
+            printBoard(board);
+        }
     }
 
     public static void printBoard(char[][] board) {
