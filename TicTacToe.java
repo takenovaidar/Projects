@@ -7,26 +7,29 @@ public class TicTacToe {
 
     
     public static void main(String[] args) {
-        char[][] board = {{'1', '|','2', '|', '3'},
+        char[][] board = {{' ', '|',' ', '|', ' '},
                 {'-','+','-','+','-'},
-                {'4','|','5', '|', '6'},
+                {' ','|',' ', '|', ' '},
                 {'-','+','-','+','-'},
-                {'7','|','8', '|', '9'}};
+                {' ','|',' ', '|', ' '}};
         printBoard(board);
 
         while (true) {
             String player = "player";
-            System.out.print(player + " Input your move from 1-9: ");
+            System.out.print(player + " Input your move from (1-9): ");
             Scanner scanner = new Scanner(System.in);
             int PlayerTurn = scanner.nextInt();
             System.out.println(PlayerTurn);
             placePiece(board, PlayerTurn, "player");
+
+            String result = winnerChek();
 
             Random random = new Random();
             int ComTurn = random.nextInt(9) + 1;
             placePiece(board, ComTurn, "Computer");
 
             printBoard(board);
+            System.out.println(result);
         }
     }
 
@@ -42,8 +45,10 @@ public class TicTacToe {
         char symbol = 'X';
         if (user.equals("player")) {
             symbol = 'X';
+            playerPositions.add(position);
         } else if (user.equals("Computer")) {
             symbol = 'O';
+            computerPositions.add(position);
         }
         switch (position) {
             case 1:
@@ -94,5 +99,17 @@ public class TicTacToe {
         winners.add(rightCol);
         winners.add(leftRowCol);
         winners.add(rightRowCol);
+
+        for (List l : winners) {
+            if (playerPositions.containsAll(l)) {
+                return "Congratulations you won!";
+            } else if (computerPositions.containsAll(l)) {
+                return "Computer wins :(";
+            } else if (playerPositions.size() + computerPositions.size() < 9) {
+                return " ";
+            }
+        }
+        return "";
+    }
 }
 
