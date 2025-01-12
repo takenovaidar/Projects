@@ -1,11 +1,10 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class TicTacToe {
 
     static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
     static ArrayList<Integer> computerPositions = new ArrayList<Integer>();
 
-    
     public static void main(String[] args) {
         char[][] board = {{' ', '|',' ', '|', ' '},
                 {'-','+','-','+','-'},
@@ -19,13 +18,20 @@ public class TicTacToe {
             System.out.print(player + " Input your move from (1-9): ");
             Scanner scanner = new Scanner(System.in);
             int PlayerTurn = scanner.nextInt();
-            System.out.println(PlayerTurn);
+            while (playerPositions.contains(PlayerTurn) || computerPositions.contains(PlayerTurn)) {
+                System.out.print("Position is occupied. Please try again: ");
+                PlayerTurn = scanner.nextInt();
+            }
             placePiece(board, PlayerTurn, "player");
 
-            String result = winnerChek();
+            String result =  winnerChek();
 
             Random random = new Random();
             int ComTurn = random.nextInt(9) + 1;
+            while (playerPositions.contains(ComTurn) || computerPositions.contains(ComTurn)) {
+                System.out.println("Position is occupied. Please try again: ");
+                ComTurn = random.nextInt(9) + 1;
+            }
             placePiece(board, ComTurn, "Computer");
 
             printBoard(board);
@@ -105,11 +111,10 @@ public class TicTacToe {
                 return "Congratulations you won!";
             } else if (computerPositions.containsAll(l)) {
                 return "Computer wins :(";
-            } else if (playerPositions.size() + computerPositions.size() < 9) {
-                return " ";
+            } else if (playerPositions.size() + computerPositions.size() == 9) {
+                return "CAT";
             }
         }
         return "";
     }
 }
-
